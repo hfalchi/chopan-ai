@@ -5,6 +5,68 @@ from prompts import SYSTEM_INSTRUCTION
 # 1. Configuración de la Página
 st.set_page_config(page_title="Asistente Chopan - Pre-Sales Tech ", page_icon="🧮", layout="wide")
 
+# --- ESTILO CYBERPUNK ---
+st.markdown("""
+    <style>
+    /* 1. Fondo Principal y Tipografía General */
+    .stApp {
+        background-color: #050505; /* Casi negro */
+        color: #00FF41; /* Verde Terminal 'Matrix' */
+        font-family: 'Courier New', Courier, monospace; /* Fuente monoespaciada */
+    }
+
+    /* 2. Títulos (H1, H2, H3) con efecto Glow */
+    h1, h2, h3 {
+        color: #00FF41 !important;
+        text-shadow: 0 0 5px #00FF41, 0 0 10px #00FF41; /* Efecto neón */
+        border-bottom: 1px dashed #00FF41;
+        padding-bottom: 10px;
+    }
+
+    /* 3. Ajuste de Inputs (Text Areas, File Uploaders) */
+    .stTextArea textarea, .stTextInput input {
+        background-color: #111 !important;
+        color: #00FF41 !important;
+        border: 1px solid #00FF41 !important;
+        font-family: 'Courier New', Courier, monospace;
+    }
+    
+    /* Etiqueta de los inputs */
+    label, .stMarkdown p {
+        color: #00FF41 !important;
+    }
+
+    /* 4. Botones Estilo Cyberpunk */
+    div.stButton > button {
+        background-color: #000000;
+        color: #00FF41;
+        border: 1px solid #00FF41;
+        border-radius: 0px; /* Bordes cuadrados */
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        font-weight: bold;
+        box-shadow: 0 0 5px #00FF41;
+    }
+
+    div.stButton > button:hover {
+        background-color: #00FF41;
+        color: #000000;
+        box-shadow: 0 0 15px #00FF41;
+    }
+
+    /* 5. Ajuste de Alertas y Spinners */
+    .stSpinner > div {
+        border-top-color: #00FF41 !important;
+    }
+    
+    /* Ocultar el menú hamburguesa superior derecho y footer para más inmersión (opcional) */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    
+    </style>
+    """, unsafe_allow_html=True)
+# -------------------------
+
 # 2. Gestión de Secretos (API Key)
 # Intenta obtener la key de st.secrets (Prod) o del entorno local
 try:
@@ -100,4 +162,5 @@ with col2:
 st.divider()
 
 st.caption("Sistema impulsado por Gemini 1.5 Pro - Configurado con Heurísticas Internas")
+
 
