@@ -3,7 +3,7 @@ import google.generativeai as genai
 from prompts import SYSTEM_INSTRUCTION
 
 # 1. Configuración de la Página
-st.set_page_config(page_title="Asistente de Estimación AI", page_icon="🧮", layout="wide")
+st.set_page_config(page_title="Asistente Chopan - Pre-Sales Tech ", page_icon="🧮", layout="wide")
 
 # 2. Gestión de Secretos (API Key)
 # Intenta obtener la key de st.secrets (Prod) o del entorno local
@@ -32,7 +32,7 @@ model = genai.GenerativeModel(
 )
 
 # 4. Interfaz de Usuario (UI)
-st.title("🤖 Estimador de Requerimientos de Software")
+st.title("🤖 Chopan - Estimador de Requerimientos de Software")
 st.markdown("""
 Sube una transcripción de reunión o pega un requerimiento. 
 La IA generará una estimación basada en las heurísticas históricas de la empresa.
@@ -82,4 +82,5 @@ with col2:
 
 # Footer informativo
 st.divider()
+
 st.caption("Sistema impulsado por Gemini 1.5 Pro - Configurado con Heurísticas Internas")
