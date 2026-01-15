@@ -2,6 +2,12 @@ import streamlit as st
 import google.generativeai as genai
 from prompts import SYSTEM_INSTRUCTION
 
+# Función para convertir imagen local a formato leíble por HTML
+def get_base64_of_bin_file(bin_file):
+    with open(bin_file, 'rb') as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
+
 # 1. Configuración de la Página
 st.set_page_config(page_title="Asistente Chopan - Pre-Sales Tech ", page_icon="💀", layout="wide")
 
@@ -148,10 +154,11 @@ model = genai.GenerativeModel(
 )
 
 # 4. Interfaz de Usuario (UI)
-st.title("Chopan - Estimador de Requerimientos de Software")
+st.title("Chopan - AI")
 st.markdown("""
+Estimador de Requerimientos de Software
 Sube una transcripción de reunión o pega un requerimiento. 
-La IA generará una estimación basada en las heurísticas históricas de la empresa.
+Chopan generará una estimación basada en las heurísticas de Envision.
 """)
 
 col1, col2 = st.columns([1, 1])
@@ -182,26 +189,35 @@ with col1:
     generate_btn = st.button("Generar Estimación", type="primary")
 
 with col2:
-    # Marco decorativo estilo HUD para el rostro
-    st.markdown("""
-    <div style="border: 1px solid #ff3838; padding: 10px; border-radius: 0px; position: relative;">
-        <div style="position: absolute; top: -10px; left: 10px; background-color: #050505; padding: 0 5px; color: #ff3838; font-size: 12px; font-weight: bold;">
+    # 1. Definimos la ruta de tu imagen GIF
+    img_path = "chopan.gif"  
+    
+    try:
+        img_base64 = get_base64_of_bin_file(img_path)
+        img_src = f"data:image/gif;base64,{img_base64}"
+    except:
+        # Si falla o no encuentra el archivo, usa un placeholder online de Cyberpunk
+        img_src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmhzcXN4bnB5bmd4emF4eXJ5eXJ5eXJ5/L1k6lS3q/giphy.gif"
+
+    # 2. Renderizamos el HUD con la imagen inyectada
+    st.markdown(f"""
+    <div style="border: 1px solid #ff3838; padding: 10px; border-radius: 0px; position: relative; background-color: #050505;">
+        <div style="position: absolute; top: -10px; left: 10px; background-color: #050505; padding: 0 5px; color: #ff3838; font-size: 12px; font-weight: bold; border: 1px solid #ff3838;">
             SYSTEM_MONITOR // V.2.55
         </div>
-        <div style="display: flex; align-items: flex-start; gap: 10px;">
-             <img src="chopan.gif" style="width: 100%; border: 2px solid #2af5ff; opacity: 0.9;">
+        <div style="display: flex; align-items: center; justify-content: center; margin-top: 10px;">
+             <img src="{img_src}" style="width: 100%; max-height: 300px; object-fit: cover; border: 1px solid #2af5ff; filter: sepia(100%) hue-rotate(190deg) saturate(500%);">
         </div>
-        <div style="margin-top: 10px; font-size: 10px; color: #555;">
-            > CPU_USAGE: 34% <br>
-            > MEMORY: OPTIMIZED <br>
-            > NET_STATUS: CONNECTED
+        <div style="margin-top: 15px; font-size: 12px; font-family: 'Courier New'; color: #2af5ff;">
+            <p style="margin:0;">> CPU_USAGE: <span style="color:#ff3838; animation: blink 1s infinite;">34%</span></p>
+            <p style="margin:0;">> MEMORY: OPTIMIZED</p>
+            <p style="margin:0;">> NET_STATUS: CONNECTED</p>
+            <p style="margin:0;">> TARGET: PROJECT_ESTIMATION</p>
         </div>
     </div>
-    """, unsafe_allow_html=True)
-    
-    # Mueve el st.image dentro de este bloque o usa el tag <img> HTML directo como arriba para más control.
+    """, unsafe_allow_html=True)     
 
-           
+# 5. Resultados ---------------------       
     st.subheader("📊 Resultado")
     
     if generate_btn and user_prompt:
@@ -229,6 +245,7 @@ with col2:
 st.divider()
 
 st.caption("Sistema impulsado por Gemini 3 Pro - Configurado con Heurísticas Internas")
+
 
 
 
