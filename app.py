@@ -1,12 +1,17 @@
 import streamlit as st
 import google.generativeai as genai
+import os
+import base64 
 from prompts import SYSTEM_INSTRUCTION
 
-# Función para convertir imagen local a formato leíble por HTML
-def get_base64_of_bin_file(bin_file):
-    with open(bin_file, 'rb') as f:
+def get_img_as_base64(file_path):
+    """Lee una imagen local y la convierte a base64."""
+    if not os.path.exists(file_path):
+        return None
+    with open(file_path, "rb") as f:
         data = f.read()
     return base64.b64encode(data).decode()
+
 
 # 1. Configuración de la Página
 st.set_page_config(page_title="Asistente Chopan - Pre-Sales Tech ", page_icon="💀", layout="wide")
@@ -189,40 +194,34 @@ with col1:
     generate_btn = st.button("Generar Estimación", type="primary")
 
 with col2:
-    # 1. Configura aquí el nombre EXACTO de tu archivo
-    # Tip: Asegúrate que si es .jpg o .png lo pongas igual.
-    local_image_filename = "avatar.png" 
-    
-    # 2. Lógica de respaldo automática
+    # 1. Configuración de imagen
+    local_image_filename = "chopan.gif"  
     img_base64 = get_img_as_base64(local_image_filename)
-    
+
+    # Lógica de respaldo
     if img_base64:
-        # Si encontró tu archivo local, úsalo
         img_src = f"data:image/png;base64,{img_base64}"
         status_text = "LOCAL_SOURCE_FOUND"
     else:
-        # SI FALLA, usa esta URL de respaldo (Cyberpunk GIF)
-        img_src = "https://media.tenor.com/IHdlTRsmcS4AAAAM/404.gif"
+        # Imagen de respaldo online (Cyberpunk GIF)
+        img_src = "https://i.pinimg.com/originals/e2/00/21/e200219c6b86419c72e4eb9df69eb858.gif"
         status_text = "REMOTE_UPLINK_ESTABLISHED"
 
-    # 3. Renderizar el HUD
+    # 3. Renderizado HTML
     st.markdown(f"""
     <div style="border: 1px solid #ff3838; padding: 10px; background-color: #050505;">
-        <div style="color: #ff3838; font-size: 10px; font-weight: bold; margin-bottom: 5px;">
+        <div style="color: #ff3838; font-size: 10px; font-weight: bold; margin-bottom: 5px; border-bottom: 1px dashed #ff3838;">
             SYSTEM_MONITOR // {status_text}
         </div>
-        <div style="display: flex; justify-content: center;">
+        <div style="display: flex; justify-content: center; margin-top: 10px;">
              <img src="{img_src}" style="width: 100%; border: 1px solid #2af5ff; filter: sepia(100%) hue-rotate(190deg) saturate(300%);">
         </div>
-        <div style="margin-top: 10px; font-size: 12px; color: #2af5ff;">
-            > TARGET: LOCKED
+        <div style="margin-top: 10px; font-size: 12px; color: #2af5ff; font-family: 'Courier New';">
+            > TARGET: LOCKED <br>
+            > AI_CORE: ONLINE
         </div>
     </div>
     """, unsafe_allow_html=True)
-    
-    # 4. (Opcional) Mensaje de error visible solo para ti en la app si falló lo local
-    if not img_base64:
-        st.error(f"⚠️ Debug: No encontré '{local_image_filename}'. Usando imagen online.")
 
 # 5. Resultados ---------------------       
     st.subheader("📊 Resultado")
@@ -252,6 +251,7 @@ with col2:
 st.divider()
 
 st.caption("Sistema impulsado por Gemini 3 Pro - Configurado con Heurísticas Internas")
+
 
 
 
