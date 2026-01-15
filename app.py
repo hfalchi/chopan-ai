@@ -161,6 +161,7 @@ with col2:
 # Footer informativo
 st.divider()
 
-st.caption("Sistema impulsado por Gemini 1.5 Pro - Configurado con Heurísticas Internas")
+st.caption("Sistema impulsado por Gemini 3 Pro - Configurado con Heurísticas Internas")
+
 
 
