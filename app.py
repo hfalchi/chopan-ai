@@ -189,7 +189,7 @@ with col2:
             SYSTEM_MONITOR // V.2.55
         </div>
         <div style="display: flex; align-items: flex-start; gap: 10px;">
-             <img src="https://ruta-a-tu-imagen.gif" style="width: 100%; border: 2px solid #2af5ff; opacity: 0.9;">
+             <img src="chopan.gif" style="width: 100%; border: 2px solid #2af5ff; opacity: 0.9;">
         </div>
         <div style="margin-top: 10px; font-size: 10px; color: #555;">
             > CPU_USAGE: 34% <br>
@@ -229,6 +229,7 @@ with col2:
 st.divider()
 
 st.caption("Sistema impulsado por Gemini 3 Pro - Configurado con Heurísticas Internas")
+
 
 
 
