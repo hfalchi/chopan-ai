@@ -5,63 +5,77 @@ from prompts import SYSTEM_INSTRUCTION
 # 1. Configuración de la Página
 st.set_page_config(page_title="Asistente Chopan - Pre-Sales Tech ", page_icon="🧮", layout="wide")
 
-# --- ESTILO CYBERPUNK ---
+# --- ESTILO CYBERPUNK 2077 (ARASAKA RED) ---
 st.markdown("""
     <style>
-    /* 1. Fondo Principal y Tipografía General */
+    /* Importamos la fuente 'Rajdhani' para que se vea igual al juego */
+    @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap');
+
+    /* 1. Fondo Principal con efecto 'Scanline' sutil */
     .stApp {
-        background-color: #050505; /* Casi negro */
-        color: #00FF41; /* Verde Terminal 'Matrix' */
-        font-family: 'Courier New', Courier, monospace; /* Fuente monoespaciada */
+        background-color: #050505;
+        /* Un degradado sutil para simular pantalla vieja */
+        background-image: linear-gradient(rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+        background-size: 100% 2px, 3px 100%;
+        color: #ff5f5f; /* Texto general en rojo suave */
+        font-family: 'Rajdhani', sans-serif; /* Tipografía técnica */
     }
 
-    /* 2. Títulos (H1, H2, H3) con efecto Glow */
+    /* 2. Títulos: Rojo intenso con borde lateral */
     h1, h2, h3 {
-        color: #00FF41 !important;
-        text-shadow: 0 0 5px #00FF41, 0 0 10px #00FF41; /* Efecto neón */
-        border-bottom: 1px dashed #00FF41;
-        padding-bottom: 10px;
+        color: #ff3838 !important; /* Rojo Neón */
+        text-transform: uppercase;
+        font-weight: 700;
+        text-shadow: 0 0 10px #ff3838; /* Glow rojo */
+        border-left: 5px solid #ff3838; /* Barra lateral estilo HUD */
+        padding-left: 15px;
+        background: linear-gradient(90deg, rgba(255,56,56,0.1) 0%, rgba(0,0,0,0) 100%);
     }
 
-    /* 3. Ajuste de Inputs (Text Areas, File Uploaders) */
+    /* 3. Cajas de Texto (Inputs): Fondo oscuro rojizo con texto Cian */
     .stTextArea textarea, .stTextInput input {
-        background-color: #111 !important;
-        color: #00FF41 !important;
-        border: 1px solid #00FF41 !important;
-        font-family: 'Courier New', Courier, monospace;
+        background-color: #120505 !important; /* Casi negro rojizo */
+        color: #2af5ff !important; /* Cian brillante para lo que escribe el usuario (Contrast) */
+        border: 1px solid #ff3838 !important;
+        font-family: 'Rajdhani', sans-serif;
+        font-size: 18px;
     }
     
-    /* Etiqueta de los inputs */
-    label, .stMarkdown p {
-        color: #00FF41 !important;
+    /* Etiquetas y textos pequeños */
+    label, .stMarkdown p, .stCaption {
+        color: #ff5f5f !important;
+        letter-spacing: 1px;
     }
 
-    /* 4. Botones Estilo Cyberpunk */
+    /* 4. Botones: Estilo 'Hacking' (Cian y Transparente) */
     div.stButton > button {
-        background-color: #000000;
-        color: #00FF41;
-        border: 1px solid #00FF41;
-        border-radius: 0px; /* Bordes cuadrados */
-        transition: all 0.3s ease;
+        background-color: transparent;
+        color: #2af5ff; /* Texto Cian */
+        border: 2px solid #2af5ff;
+        border-radius: 0px; /* Bordes duros */
+        padding: 10px 25px;
         text-transform: uppercase;
         font-weight: bold;
-        box-shadow: 0 0 5px #00FF41;
+        transition: all 0.2s ease-in-out;
+        box-shadow: 0 0 5px #2af5ff;
     }
 
     div.stButton > button:hover {
-        background-color: #00FF41;
-        color: #000000;
-        box-shadow: 0 0 15px #00FF41;
+        background-color: #2af5ff;
+        color: #000; /* Texto negro al pasar el mouse */
+        box-shadow: 0 0 20px #2af5ff, inset 0 0 10px #2af5ff;
+        border-color: #2af5ff;
     }
 
-    /* 5. Ajuste de Alertas y Spinners */
+    /* 5. Spinners y Barras de carga */
     .stSpinner > div {
-        border-top-color: #00FF41 !important;
+        border-top-color: #2af5ff !important;
     }
-    
-    /* Ocultar el menú hamburguesa superior derecho y footer para más inmersión (opcional) */
+
+    /* Ocultar elementos de Streamlit por defecto */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
+    header {visibility: hidden;}
     
     </style>
     """, unsafe_allow_html=True)
@@ -167,6 +181,7 @@ with col2:
 st.divider()
 
 st.caption("Sistema impulsado por Gemini 3 Pro - Configurado con Heurísticas Internas")
+
 
 
 
