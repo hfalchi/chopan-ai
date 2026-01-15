@@ -3,13 +3,18 @@ import google.generativeai as genai
 from prompts import SYSTEM_INSTRUCTION
 
 # 1. Configuración de la Página
-st.set_page_config(page_title="Asistente Chopan - Pre-Sales Tech ", page_icon="🧮", layout="wide")
+st.set_page_config(page_title="Asistente Chopan - Pre-Sales Tech ", page_icon="💀", layout="wide")
 
 # --- ESTILO CYBERPUNK 2077 (ARASAKA RED) ---
 st.markdown("""
     <style>
     /* Importamos la fuente 'Rajdhani' para que se vea igual al juego */
     @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap');
+
+    .block-container {
+    padding-top: 2rem !important; /* Reduce el espacio arriba del título */
+    padding-bottom: 2rem !important;
+    }
 
     /* 1. Fondo Principal con efecto 'Scanline' sutil */
     .stApp {
@@ -72,6 +77,36 @@ st.markdown("""
         border-top-color: #2af5ff !important;
     }
 
+    /* Input de texto: Hacerlo parecer una consola */
+    .stTextArea textarea {
+        background-color: #000000 !important;
+        border: 1px dashed #ff3838 !important; /* Borde punteado rojo */
+        color: #2af5ff !important;
+        font-family: 'Courier New', monospace;
+    }
+    
+    /* Efecto de foco cuando escribes */
+    .stTextArea textarea:focus {
+        box-shadow: 0 0 15px rgba(255, 56, 56, 0.3);
+        border-left: 5px solid #ff3838 !important;
+    }
+    
+    /* Botón de acción principal: Estilo 'Glitch' */
+    div.stButton > button {
+        width: 100%; /* Botón ancho completo */
+        background: linear-gradient(45deg, transparent 5%, #ff3838 5%);
+        color: #000;
+        font-weight: 900;
+        letter-spacing: 2px;
+        border: none;
+        clip-path: polygon(0 0, 100% 0, 100% 80%, 95% 100%, 0 100%); /* Corte en la esquina */
+    }
+    
+    div.stButton > button:hover {
+        background: linear-gradient(45deg, transparent 5%, #2af5ff 5%); /* Cambia a azul al pasar mouse */
+        color: #000;
+    }
+
     /* Ocultar elementos de Streamlit por defecto */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
@@ -113,13 +148,22 @@ model = genai.GenerativeModel(
 )
 
 # 4. Interfaz de Usuario (UI)
-st.title("🤖 Chopan - Estimador de Requerimientos de Software")
+st.title("Chopan - Estimador de Requerimientos de Software")
 st.markdown("""
 Sube una transcripción de reunión o pega un requerimiento. 
 La IA generará una estimación basada en las heurísticas históricas de la empresa.
 """)
 
 col1, col2 = st.columns([1, 1])
+
+# Barra de estado superior
+m1, m2, m3, m4 = st.columns(4)
+m1.metric("LATENCY", "12ms", "-2ms")
+m2.metric("TOKENS", "8K Limit", "READY")
+m3.metric("SECURITY", "ENCRYPTED", "OK")
+m4.metric("ESTIMATION_ENGINE", "ONLINE", "GEMINI-PRO")
+
+st.divider() # Una línea divisoria
 
 with col1:
     st.subheader("📥 Entrada de Datos")
@@ -138,20 +182,24 @@ with col1:
     generate_btn = st.button("Generar Estimación", type="primary")
 
 with col2:
-    # --- NUEVO CÓDIGO: EL ROSTRO DEL ASISTENTE ---
-    # Centramos la imagen usando columnas dentro de la columna para controlar el tamaño
-    c_izq, c_centro, c_der = st.columns([1, 2, 1]) 
+    # Marco decorativo estilo HUD para el rostro
+    st.markdown("""
+    <div style="border: 1px solid #ff3838; padding: 10px; border-radius: 0px; position: relative;">
+        <div style="position: absolute; top: -10px; left: 10px; background-color: #050505; padding: 0 5px; color: #ff3838; font-size: 12px; font-weight: bold;">
+            SYSTEM_MONITOR // V.2.55
+        </div>
+        <div style="display: flex; align-items: flex-start; gap: 10px;">
+             <img src="https://ruta-a-tu-imagen.gif" style="width: 100%; border: 2px solid #2af5ff; opacity: 0.9;">
+        </div>
+        <div style="margin-top: 10px; font-size: 10px; color: #555;">
+            > CPU_USAGE: 34% <br>
+            > MEMORY: OPTIMIZED <br>
+            > NET_STATUS: CONNECTED
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
     
-    with c_centro:
-        # Reemplaza 'ai_assistant.gif' con el nombre real de tu archivo
-        # Si usas un video mp4, cámbialo por st.video("video.mp4", loop=True, autoplay=True, muted=True)
-        st.image("chopan.gif", use_container_width=True) 
-        
-        # Opcional: Un pequeño texto de estado debajo del rostro
-        st.caption("🤖 *Hit me with something chum...*", help="Soy Chopan")
-
-    st.divider()
-    # ---------------------------------------------
+    # Mueve el st.image dentro de este bloque o usa el tag <img> HTML directo como arriba para más control.
 
            
     st.subheader("📊 Resultado")
@@ -181,6 +229,7 @@ with col2:
 st.divider()
 
 st.caption("Sistema impulsado por Gemini 3 Pro - Configurado con Heurísticas Internas")
+
 
 
 
