@@ -91,8 +91,8 @@ model = genai.GenerativeModel(
        
     # Alternativas de modelos
     # model_name="gemini-3-pro-preview", 
-    model_name="gemini-2.5-pro",
-    # model_name="gemini-flash-latest",
+    # model_name="gemini-2.5-pro",
+    model_name="gemini-flash-latest",
     
     generation_config=generation_config,
     system_instruction=SYSTEM_INSTRUCTION
@@ -167,6 +167,7 @@ with col2:
 st.divider()
 
 st.caption("Sistema impulsado por Gemini 3 Pro - Configurado con Heurísticas Internas")
+
 
 
 
