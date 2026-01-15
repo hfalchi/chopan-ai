@@ -197,7 +197,7 @@ with col2:
         img_src = f"data:image/gif;base64,{img_base64}"
     except:
         # Si falla o no encuentra el archivo, usa un placeholder online de Cyberpunk
-        img_src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmhzcXN4bnB5bmd4emF4eXJ5eXJ5eXJ5/L1k6lS3q/giphy.gif"
+        img_src = "https://github.com/hfalchi/chopan-ai/blob/main/chopan.gif"
 
     # 2. Renderizamos el HUD con la imagen inyectada
     st.markdown(f"""
@@ -245,6 +245,7 @@ with col2:
 st.divider()
 
 st.caption("Sistema impulsado por Gemini 3 Pro - Configurado con Heurísticas Internas")
+
 
 
 
