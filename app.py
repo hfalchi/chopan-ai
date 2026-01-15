@@ -209,26 +209,22 @@ with col2:
         status_text = "REMOTE_UPLINK_ESTABLISHED"
 
     # 3. Renderizado HTML con textwrap para evitar el error de indentación
-    html_code = textwrap.dedent(f"""
-        <div style="border: 1px solid #ff3838; padding: 10px; background-color: #050505;">
-            <div style="color: #ff3838; font-size: 10px; font-weight: bold; margin-bottom: 5px; border-bottom: 1px dashed #ff3838; display: flex; justify-content: space-between;">
-                <span>SYSTEM_MONITOR</span>
-                <span style="color: #2af5ff;">STATUS: {status_text}</span>
-            </div>
-            
-            <div style="display: flex; justify-content: center; align-items: center; margin-top: 10px; background-color: #000; padding: 5px; border: 1px solid #ff3838;">
-                 <img src="{img_src}" style="width: 100%; height: auto; max-height: 300px; object-fit: cover; border: 1px solid #2af5ff; filter: sepia(100%) hue-rotate(190deg) saturate(300%);">
-            </div>
-            
-            <div style="margin-top: 10px; font-size: 12px; color: #2af5ff; font-family: 'Courier New';">
-                > TARGET: LOCKED <br>
-                > AI_CORE: ONLINE <br>
-                > MODE: ESTIMATION_V3
-            </div>
-        </div>
-    """)
-    st.markdown(html_code, unsafe_allow_html=True)
-
+    st.markdown(f"""
+<div style="border: 1px solid #ff3838; padding: 10px; background-color: #050505;">
+    <div style="color: #ff3838; font-size: 10px; font-weight: bold; margin-bottom: 5px; border-bottom: 1px dashed #ff3838; display: flex; justify-content: space-between;">
+        <span>SYSTEM_MONITOR</span>
+        <span style="color: #2af5ff;">STATUS: {status_text}</span>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center; margin-top: 10px; background-color: #000; padding: 5px; border: 1px solid #ff3838;">
+            <img src="{img_src}" style="width: 100%; height: auto; max-height: 300px; object-fit: cover; border: 1px solid #2af5ff; filter: sepia(100%) hue-rotate(190deg) saturate(300%);">
+    </div>
+    <div style="margin-top: 10px; font-size: 12px; color: #2af5ff; font-family: 'Courier New';">
+        > TARGET: LOCKED <br>
+        > AI_CORE: ONLINE <br>
+        > MODE: ESTIMATION_V3
+    </div>
+</div>
+""", unsafe_allow_html=True)
 # 5. Resultados ---------------------       
     st.subheader("📊 Resultado")
     
@@ -257,4 +253,5 @@ with col2:
 st.divider()
 
 st.caption("Sistema impulsado por Gemini 3 Pro - Configurado con Heurísticas Internas")
+
 
