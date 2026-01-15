@@ -189,33 +189,40 @@ with col1:
     generate_btn = st.button("Generar Estimación", type="primary")
 
 with col2:
-    # 1. Definimos la ruta de tu imagen GIF
-    img_path = "chopan.gif"  
+    # 1. Configura aquí el nombre EXACTO de tu archivo
+    # Tip: Asegúrate que si es .jpg o .png lo pongas igual.
+    local_image_filename = "avatar.png" 
     
-    try:
-        img_base64 = get_base64_of_bin_file(img_path)
-        img_src = f"data:image/gif;base64,{img_base64}"
-    except:
-        # Si falla o no encuentra el archivo, usa un placeholder online de Cyberpunk
-        img_src = "https://github.com/hfalchi/chopan-ai/blob/main/chopan.gif"
+    # 2. Lógica de respaldo automática
+    img_base64 = get_img_as_base64(local_image_filename)
+    
+    if img_base64:
+        # Si encontró tu archivo local, úsalo
+        img_src = f"data:image/png;base64,{img_base64}"
+        status_text = "LOCAL_SOURCE_FOUND"
+    else:
+        # SI FALLA, usa esta URL de respaldo (Cyberpunk GIF)
+        img_src = "https://media.tenor.com/IHdlTRsmcS4AAAAM/404.gif"
+        status_text = "REMOTE_UPLINK_ESTABLISHED"
 
-    # 2. Renderizamos el HUD con la imagen inyectada
+    # 3. Renderizar el HUD
     st.markdown(f"""
-    <div style="border: 1px solid #ff3838; padding: 10px; border-radius: 0px; position: relative; background-color: #050505;">
-        <div style="position: absolute; top: -10px; left: 10px; background-color: #050505; padding: 0 5px; color: #ff3838; font-size: 12px; font-weight: bold; border: 1px solid #ff3838;">
-            SYSTEM_MONITOR // V.2.55
+    <div style="border: 1px solid #ff3838; padding: 10px; background-color: #050505;">
+        <div style="color: #ff3838; font-size: 10px; font-weight: bold; margin-bottom: 5px;">
+            SYSTEM_MONITOR // {status_text}
         </div>
-        <div style="display: flex; align-items: center; justify-content: center; margin-top: 10px;">
-             <img src="{img_src}" style="width: 100%; max-height: 300px; object-fit: cover; border: 1px solid #2af5ff; filter: sepia(100%) hue-rotate(190deg) saturate(500%);">
+        <div style="display: flex; justify-content: center;">
+             <img src="{img_src}" style="width: 100%; border: 1px solid #2af5ff; filter: sepia(100%) hue-rotate(190deg) saturate(300%);">
         </div>
-        <div style="margin-top: 15px; font-size: 12px; font-family: 'Courier New'; color: #2af5ff;">
-            <p style="margin:0;">> CPU_USAGE: <span style="color:#ff3838; animation: blink 1s infinite;">34%</span></p>
-            <p style="margin:0;">> MEMORY: OPTIMIZED</p>
-            <p style="margin:0;">> NET_STATUS: CONNECTED</p>
-            <p style="margin:0;">> TARGET: PROJECT_ESTIMATION</p>
+        <div style="margin-top: 10px; font-size: 12px; color: #2af5ff;">
+            > TARGET: LOCKED
         </div>
     </div>
-    """, unsafe_allow_html=True)     
+    """, unsafe_allow_html=True)
+    
+    # 4. (Opcional) Mensaje de error visible solo para ti en la app si falló lo local
+    if not img_base64:
+        st.error(f"⚠️ Debug: No encontré '{local_image_filename}'. Usando imagen online.")
 
 # 5. Resultados ---------------------       
     st.subheader("📊 Resultado")
@@ -245,6 +252,7 @@ with col2:
 st.divider()
 
 st.caption("Sistema impulsado por Gemini 3 Pro - Configurado con Heurísticas Internas")
+
 
 
 
