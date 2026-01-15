@@ -88,10 +88,11 @@ generation_config = {
 
 # Inicializamos el modelo con la instrucción del sistema importada
 model = genai.GenerativeModel(
-    model_name="gemini-3-pro-preview", 
-    
-    # Alternativa un poco más económica 
-    # model_name="gemini-2.5-pro",
+       
+    # Alternativas de modelos
+    # model_name="gemini-3-pro-preview", 
+    model_name="gemini-2.5-pro",
+    # model_name="gemini-flash-latest",
     
     generation_config=generation_config,
     system_instruction=SYSTEM_INSTRUCTION
@@ -166,6 +167,7 @@ with col2:
 st.divider()
 
 st.caption("Sistema impulsado por Gemini 3 Pro - Configurado con Heurísticas Internas")
+
 
 
 
