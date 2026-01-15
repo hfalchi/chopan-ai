@@ -195,7 +195,7 @@ with col1:
 
 with col2:
     # 1. Configuración de imagen
-    local_image_filename = "chopan.gif"  
+    local_image_filename = "chopan2.gif"  
     img_base64 = get_img_as_base64(local_image_filename)
 
     # Lógica de respaldo
@@ -204,7 +204,7 @@ with col2:
         status_text = "LOCAL_SOURCE_FOUND"
     else:
         # Imagen de respaldo online (Cyberpunk GIF)
-        img_src = "https://i.pinimg.com/originals/e2/00/21/e200219c6b86419c72e4eb9df69eb858.gif"
+        img_src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmhzcXN4bnB5bmd4emF4eXJ5eXJ5eXJ5/L1k6lS3q/giphy.gif"
         status_text = "REMOTE_UPLINK_ESTABLISHED"
 
     # 3. Renderizado HTML
@@ -251,6 +251,7 @@ with col2:
 st.divider()
 
 st.caption("Sistema impulsado por Gemini 3 Pro - Configurado con Heurísticas Internas")
+
 
 
 
