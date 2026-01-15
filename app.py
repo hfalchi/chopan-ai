@@ -57,6 +57,22 @@ with col1:
     generate_btn = st.button("Generar Estimación", type="primary")
 
 with col2:
+    # --- NUEVO CÓDIGO: EL ROSTRO DEL ASISTENTE ---
+    # Centramos la imagen usando columnas dentro de la columna para controlar el tamaño
+    c_izq, c_centro, c_der = st.columns([1, 2, 1]) 
+    
+    with c_centro:
+        # Reemplaza 'ai_assistant.gif' con el nombre real de tu archivo
+        # Si usas un video mp4, cámbialo por st.video("video.mp4", loop=True, autoplay=True, muted=True)
+        st.image("chopan.gif", use_container_width=True) 
+        
+        # Opcional: Un pequeño texto de estado debajo del rostro
+        st.caption("🤖 *Hit me with something chum...*", help="Soy Chopan")
+
+    st.divider()
+    # ---------------------------------------------
+
+           
     st.subheader("📊 Resultado")
     
     if generate_btn and user_prompt:
@@ -84,3 +100,4 @@ with col2:
 st.divider()
 
 st.caption("Sistema impulsado por Gemini 1.5 Pro - Configurado con Heurísticas Internas")
+
